@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="css/login.scss">
+<script src="libs/login/login.js"></script>
+
+<div class="wrapper">
+  <form class="login" ng-submit="Aceptar()">
+    <p class="title">Usuario</p>
+    <input ng-model="Username" type="text" required="Este campo es requerido" placeholder="Escribe un nombre" autofocus/>
+    <i class="fa fa-user"></i> 
+    
+    <button type="submit" > 
+    <div ng-if="ShowSpinner">
+      <i class="spinner"></i>
+     </div>
+      <span class="state">Aceptar</span>
+    </button >
+  </form>
+  </p>
+</div>

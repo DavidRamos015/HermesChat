@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<base href="/">
+
+	<title>Bienvenido a Hermes Chat</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	
+	<!-- Archivos CSS -->
+	<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+	<script src="libs/jquery/dist/jquery.min.js"></script>
+	<script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/chatPrivado.css">
+ 
+	
+	
+
+	<!-- Archivos JavaScript -->
+	<script src="libs/angular/angular.min.js"></script>
+	<script src="https://js.pusher.com/3.2/pusher.min.js"></script>
+	<script src="//cdn.jsdelivr.net/angular.pusher/latest/pusher-angular.min.js"></script>
+	<script src="libs/angular-route/angular-route.min.js"></script> 
+	<script src="libs/chat/chatPrivado.js"></script>
+ 
+ 	<!-- Archivos de Angular -->
+	<script src="js/services/chatService.js"></script>
+	<script src="js/controllers/chatCtrl.js"></script>
+	<script src="js/controllers/MainCtrl.js"></script>
+	<script src="js/myApp.js"></script>
+
+</head>
+<body ng-app="myApp">
+<div class="container">
+	
+
+<!-- 	<nav class="navbar navbar-inverse">
+		<div class="navbar-header">
+		</div>
+		<ul class="nav navbar-nav">
+			<li><a href="/chatear">Chat Privado</a></li>
+		</ul>
+	</nav> -->
+
+	
+	<div ng-view></div>
+
+</div>
+</body>
+</html>
