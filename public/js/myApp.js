@@ -10,6 +10,13 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         }) 
         .when('/chatear', 
         {
+            // templateUrl: 'views/chatGlobal.html',
+            templateUrl: 'views/chatGlobal.html',
+            controller: 'chatController'
+        })
+        .when('/chatPrivado', 
+        {
+            // templateUrl: 'views/chatGlobal.html',
             templateUrl: 'views/chatPrivado.html',
             controller: 'chatController'
         }) ;

@@ -26,14 +26,31 @@ app.controller("chatController", ['$scope', '$pusher', 'Chat', function($scope, 
 
     $scope.Salir =function()
     {
+
+        Chat.EliminarAlCerrarSesion($scope.Username).then(function(response) 
+            {
+                console.log(response.data);
+                console.log("Actualizar lista");
+
+                //var indice = $scope.ListaUsuarios.indexOf(response.data);
+                //$scope.ListaUsuarios.splice(indice, 1);
+                //$scope.CargarUsuarios();
+            },function(response) 
+            {
+                $scope.MostrarMensaje=true;
+                $scope.Mensaje="Error al obtener eliminar." 
+            });
+
         $scope.Username="";
         localStorage.setItem('Username', $scope.Username);
+        $scope.CargarUsuarios();
     }
 
-    function CargarChats() 
+    $scope.CargarChats = function()
     {
         $scope.Username = localStorage.getItem('Username');
         $scope.limpiar();
+        console.log("usuario:" +$scope.Username);
 
         Chat.obtenerComentariosGlobales().then(function(response) 
             {
@@ -45,11 +62,34 @@ app.controller("chatController", ['$scope', '$pusher', 'Chat', function($scope, 
             });
     }
 
-    CargarChats();
+    $scope.CargarUsuarios=function()
+    {
+        Chat.obtenerUsuariosLogueados().then(function(response) 
+        {
+            $scope.Usuarios = response.data;
+        },function(response) 
+        {
+            $scope.MostrarMensaje=true;
+            $scope.Mensaje="Error al obtener chats." 
+        });
+    }
+
 
     channel.bind('Comentarios', function(comentario) 
     {
         $scope.Chats.push(comentario);
+    });
+
+    channel.bind('ListaUsuarios', function(usuario) 
+    {
+        $scope.Usuarios.push(usuario);
+    });
+
+    channel.bind('CerrarSesion', function(usuario) 
+    {
+        console.log("Un usuario cerro sesion") 
+        var indice = $scope.Usuarios.indexOf(usuario.Usuario);
+        $scope.Usuarios.splice(indice, 1);     
     });
 
     $scope.Comentar = function() 
@@ -76,5 +116,16 @@ app.controller("chatController", ['$scope', '$pusher', 'Chat', function($scope, 
                 $scope.Mensaje="No se pudo agregar el comentario." 
             });
     };
+
+
+
+
+    $scope.Inicializar = function()
+    {
+        $scope.CargarChats();
+        $scope.CargarUsuarios();
+    }
+
+    $scope.Inicializar();
 
 }]);
